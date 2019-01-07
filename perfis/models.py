@@ -18,13 +18,12 @@ class Perfil(models.Model):
     def email(self):
         return self.usuario.email
 
-
     def convidar(self, perfil_convidado):
-        #if self.pode_convidar(perfil_convidado):
-        convite = Convite(solicitante=self, convidado = perfil_convidado)
-        convite.save()
+        if self.pode_convidar(perfil_convidado):
+            convite = Convite(solicitante=self,convidado = perfil_convidado)
+            convite.save()
             
-    def desfazer_amizade(self,perfil_id):
+     def desfazer_amizade(self,perfil_id):
             self.contatos.remove(perfil_id)
             
 class Convite(models.Model):
